@@ -32,24 +32,6 @@ public class Parser {
 		}
 
 	}
-	/*
-	public static Table<DictEntry> parse(String filename) throws IOException {
-		String dump = readFile(filename);
-		JSONArray words = new JSONArray(dump);
-		Table<DictEntry> table = new Table<DictEntry>();
-		for (int i = 0; i < words.length(); i++) {
-			var roots = words.getJSONArray(i);
-			DictEntry entry = new DictEntry();
-			for (int j = 0; j < roots.length(); j++) {
-				var rootString = roots.getJSONObject(j).toString();
-		    	ObjectMapper om = new ObjectMapper();
-		    	Root rootJavaObject = om.readValue(rootString, Root.class);
-		    	entry.roots.add(rootJavaObject);
-			}
-			table.put(roots.getJSONObject(0).getString("word"), entry);
-		}
-		return table;
-	}*/
 	
 	public static Table<JSONArray> parse(String filename) throws IOException {
 		String dump = readFile(filename);
