@@ -10,7 +10,6 @@ import org.json.JSONException;
 import DataStructures.Table;
 import Util.Timer;
 
-@SuppressWarnings("unused")
 public class Parser {
 	
 	public static String readFile(String filename) {
@@ -43,11 +42,23 @@ public class Parser {
 		return table;
 	}
 	
+	public static Table<DictEntry> parse2(String filename) throws IOException {
+		String dump = readFile(filename);
+		JSONArray words = new JSONArray(dump);
+		Table<DictEntry> table = new Table<DictEntry>();
+		
+		for (int i = 0; i < words.length(); i++) {
+			var array = words.getJSONArray(i);
+			String word = array.getJSONObject(0).getString("word");
+			table.put(word, new DictEntry(word, array));
+		}
+		
+		return table;
+	}
+	
 	public static void main(String[] args) throws JSONException, IOException {
-		var t = new Timer();
-		var table = parse("newDump.json");
-		t.end();
-		System.out.println("done!");
+		Table<DictEntry> table = parse2("dump.json");
+		System.out.println(table.get("angler"));
 	}
 
 }
