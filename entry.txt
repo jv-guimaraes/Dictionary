@@ -1,0 +1,13 @@
+{
+	"word": "a",
+	"meanings": [{
+		"partOfSpeech": "noun",
+		"definitions": [{
+			"definition": "The name of the Latin script letter A/a.",
+			"synonyms": ["like", "hate"],
+			"antonyms": ["love", "lover"]
+		}],
+		"synonyms": ["like", "hate"],
+		"antonyms": ["like", "hate"]
+	}]
+}

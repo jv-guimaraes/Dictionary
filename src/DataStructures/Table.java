@@ -1,20 +1,19 @@
 package DataStructures;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 
-import FileIO.ReadFile;
+import org.json.JSONArray;
+
+import Dictionary.Parser;
 
 @SuppressWarnings("unchecked")
 public class Table<V> {
-	int capacity;
+	int capacity = 2048;
 	int size = 0;
-	double maxLoad = 0.75;
-	List<TableEntry<V>>[] slots;
+	final double maxLoad = 0.75;
+	List<TableEntry<V>>[] slots = new List[capacity];
 	
-	public Table() {
-		this.capacity = 64;
-		this.slots = new List[capacity];
-	}
+	public Table() {}
 	
 	public Table(int capacity) {
 		this.capacity = capacity;
@@ -35,7 +34,6 @@ public class Table<V> {
 		size += slots[index].insert(new TableEntry<V>(key, value));
 		if (load() > maxLoad) {
 			resize(capacity * 2);
-			System.out.println(capacity);
 		}
 	}
 	
@@ -106,10 +104,16 @@ public class Table<V> {
 		}
 		slots = newSlots;
 	}
+	
+	public int size() {
+		return size;
+	}
 
-	public static void main(String[] args) throws FileNotFoundException {
-		var words = ReadFile.loadFile("words.txt");
-		var table = new Table<Integer>();
-		for (int i = 0; i < words.size(); i++) table.put(words.get(i), i);
+	public static void main(String[] args) throws IOException {
+		String word = Parser.readFile("dump.json");
+		JSONArray jo = new JSONArray(word);
+		for (int i = 5500; i < 5510; i++) {
+			System.out.println(((JSONArray) jo.get(i)).get(0));
+		}
 	}
 }
