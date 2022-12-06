@@ -1,10 +1,5 @@
 package DataStructures;
-import java.io.IOException;
 import java.util.Arrays;
-
-import org.json.JSONArray;
-
-import Dictionary.Parser;
 
 @SuppressWarnings("unchecked")
 public class Table<V> {
@@ -50,6 +45,14 @@ public class Table<V> {
 		if (slots[index] != null) {
 			size -= slots[index].remove(new TableEntry<V>(key, null));
 		}
+	}
+	
+	public boolean hasKey(String key) {
+		int index = hash(key);
+		if (slots[index] == null) return false;
+		var searchResult = slots[index].search(new TableEntry<V>(key, null));
+		if (searchResult == null) return false;
+		return true;
 	}
 	
 	@Override
@@ -109,11 +112,4 @@ public class Table<V> {
 		return size;
 	}
 
-	public static void main(String[] args) throws IOException {
-		String word = Parser.readFile("dump.json");
-		JSONArray jo = new JSONArray(word);
-		for (int i = 5500; i < 5510; i++) {
-			System.out.println(((JSONArray) jo.get(i)).get(0));
-		}
-	}
 }

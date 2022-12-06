@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import DataStructures.Table;
+import DataStructures.TableLP;
 import Util.Timer;
 
 public class Parser {
@@ -57,8 +58,10 @@ public class Parser {
 	}
 	
 	public static void main(String[] args) throws JSONException, IOException {
-		Table<DictEntry> table = parse2("dump.json");
-		System.out.println(table.get("angler"));
+		var t = new Timer();
+		Table<DictEntry> table = parse2("newDump.json");
+		t.end();
+		System.out.println(table.size());
 	}
 
 }
